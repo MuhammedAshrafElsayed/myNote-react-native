@@ -7,7 +7,7 @@
  */
 
 import React from 'react';
-import type {Node} from 'react';
+import type { Node } from 'react';
 import {
   SafeAreaView,
   ScrollView,
@@ -17,9 +17,10 @@ import {
   useColorScheme,
   View,
 } from 'react-native';
-
+import { NavigationContainer } from '@react-navigation/native';
+import { createNativeStackNavigator } from '@react-navigation/native-stack';
 import { NativeBaseProvider, ColorMode } from 'native-base';
-
+import NoteProvider from './context/NoteProvider';
 import {
   Colors,
   DebugInstructions,
@@ -30,9 +31,13 @@ import {
 
 import Header from "./components/Header";
 import AppBar from "./components/AppBar";
-import NoteList from "./components/NoteLIst";
+import Layout from './components/Layout';
+import NoteList from "./components/NoteList";
+import Home from './pages/Home';
+import EditNote from './pages/EditNote';
+import AddNote from './pages/AddNote';
 
-const Section = ({children, title}): Node => {
+const Section = ({ children, title }): Node => {
   const isDarkMode = useColorScheme() === 'dark';
   return (
     <View style={styles.sectionContainer}>
@@ -58,6 +63,7 @@ const Section = ({children, title}): Node => {
   );
 };
 
+const Stack = createNativeStackNavigator();
 const App: () => Node = () => {
   const isDarkMode = useColorScheme() === 'dark';
 
@@ -67,9 +73,26 @@ const App: () => Node = () => {
 
   return (
     <NativeBaseProvider>
-      <AppBar></AppBar>
-    <SafeAreaView style={backgroundStyle}>
-      {/* <StatusBar barStyle={isDarkMode ? 'light-content' : 'dark-content'} />
+      {/* <Layout title="Home">  */}
+      <NoteProvider>
+        <NavigationContainer>
+          <Stack.Navigator>
+
+            <Stack.Screen
+              name="Home"
+              component={Home}
+            />
+            <Stack.Screen name="Edit" component={EditNote} />
+            <Stack.Screen name="Add" component={AddNote} />
+            
+          </Stack.Navigator>
+        </NavigationContainer>
+      </NoteProvider>
+      {/* </Layout> */}
+      {/* <AppBar title='Home'></AppBar> */}
+
+      {/*<SafeAreaView style={backgroundStyle}>
+     <StatusBar barStyle={isDarkMode ? 'light-content' : 'dark-content'} />
       <ScrollView
         contentInsetAdjustmentBehavior="automatic"
         style={backgroundStyle}>
@@ -95,9 +118,9 @@ const App: () => Node = () => {
           </Section>
           <LearnMoreLinks />
         </View>
-      </ScrollView> */}
-      <NoteList></NoteList>
-    </SafeAreaView>
+      </ScrollView> 
+    </SafeAreaView>*/}
+
     </NativeBaseProvider>
   );
 };

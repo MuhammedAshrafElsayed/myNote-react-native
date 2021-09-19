@@ -1,8 +1,9 @@
 import React from "react";
-import { VStack, HStack, Button, IconButton, Icon, Text, NativeBaseProvider, Center, Box, StatusBar, HamburgerIcon } from "native-base";
+import { VStack, HStack, Button, IconButton, Icon, Text, NativeBaseProvider, Center, Box, StatusBar, HamburgerIcon, QuestionIcon  } from "native-base";
 // import { MaterialIcons } from '@expo/vector-icons';
 
-function AppBar(){
+
+function AppBar(props){
   return (
     <>
         <StatusBar backgroundColor="#3700B3" barStyle="light-content" />
@@ -11,8 +12,8 @@ function AppBar(){
 
         <HStack bg='#6200ee' px={1} py={3} justifyContent='space-between' alignItems='center'>
           <HStack space={4} alignItems='center'>
-            <IconButton icon={<Icon size="sm" as={<HamburgerIcon />} color="white" />} />
-            <Text color="white" fontSize={20} fontWeight='bold'>Home</Text>
+            <IconButton icon={<HamburgerIcon size="sm"  color="white" />} />
+            <Text color="white" fontSize={20} fontWeight='bold'> {props.title}</Text>
           </HStack>
           <HStack space={2}>
             {/* <IconButton icon={<Icon as={<MaterialIcons name='favorite' />} size='sm' color="white" />} />
@@ -26,10 +27,4 @@ function AppBar(){
   )
 }
 
-export default function () {
-  return (
-    <NativeBaseProvider>
-      <AppBar/>
-    </NativeBaseProvider>
-  );
-}
+export default AppBar;
