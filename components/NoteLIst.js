@@ -4,20 +4,22 @@ import {
     Dimensions,
     TouchableOpacity,
     View,
-    
 } from 'react-native';
 
 import {NativeBaseProvider,Box, Text,Pressable,Heading,IconButton,Icon, HStack, Avatar } from 'native-base';
-import { SwipeListView } from 'react-native-swipe-list-view';   
-// import { MaterialIcons,Ionicons } from '@expo/vector-icons';
+import { SwipeListView } from 'react-native-swipe-list-view';
+import { MaterialIcons,Ionicons } from '@expo/vector-icons';
 
-export default function App(props) {
+export default function App() {
     const [mode, setMode] = useState('Basic');
 
     return (
+      <NativeBaseProvider >
         <Box textAlign="center" bg= 'white' flex= {1} safeAreaTop>
+          <Heading my={6} textAlign="center" size="lg">Swipe list Example</Heading>
             <Basic />
         </Box>
+        </NativeBaseProvider>
     );
 }
 
@@ -94,7 +96,7 @@ function Basic() {
                   opacity: 0.5
                 }}
               >
-                {/* <Icon as={<Ionicons name="close"  />} color='white'/> */}
+                <Icon as={<Ionicons name="close"  />} color='white'/>
             </Pressable>
             <Pressable
               px={4}
@@ -106,7 +108,7 @@ function Basic() {
                   opacity: 0.5
                 }}
               >
-                {/* <Icon as={<MaterialIcons name="delete"/>} color="white" /> */}
+                <Icon as={<MaterialIcons name="delete"/>} color="white" />
            </Pressable>
         </HStack>
     );
